@@ -1,0 +1,29 @@
+# Node modules
+node_modules/
+
+# Environment variables
+.env
+
+# VS Code settings
+.vscode/
+
+# Logs
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Coverage reports
+coverage/
+
+# Build files
+dist/
+
+# Temporary files
+*.tmp
+*.swp
+
+# Docker
+Dockerfile
+docker-compose.yml
