@@ -89,6 +89,7 @@ const crearUsuario = async (req, res = response) => {
         }
         res.status(201).json({
             success: true,
+            _id: people.id,
             msg: 'Usuario creado correctamente con los datos proporcionados',
         });
     } catch (error) {

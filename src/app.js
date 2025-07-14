@@ -17,9 +17,22 @@ app.use(helmet());
 app.use(rateLimit);
 
 // CORS
+const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:4000'];
+
 app.use(cors({
-  origin: process.env.ALLOWED_ORIGINS?.split(',') || 'http://localhost:4000',
-  credentials: true
+    origin: function (origin, callback) {
+        // Permitir peticiones sin origin (como Postman, mobile apps)
+        if (!origin) return callback(null, true);
+        
+        if (allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error(`Origin ${origin} no permitido por CORS`));
+        }
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-token']
 }));
 
 // Body parser
